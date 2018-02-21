@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <title>JSP Page</title>
+
+    </head>
+    <body>
+        <a id="top"></a>
+    <div id="container" style="width:100% " >
+        <div id="header" style="background-color:#ACCCCD;height:20%">
+            <div id="systemTitle">
+                <h1>22222333333</h1>
+                <h2>2233</h2>
+            </div>
+        </div>
+            <div id="maintain" style="float: left; display: inline; height:70%;width: 100%">
+        <div id="sitebar" style="background-color:red;width:20%;float: left">
+
+                    <ul >
+                  <li><a href="#repMenu">&nbsp;00</a></li>
+                  <li><ul id="repMenu">
+                  <li><a href="###" onclick="showAtRight('http://localhost:8080/ajax_test/content.html')">01</a></li>
+                  <li><a href="###" onclick="showAtRight('http://localhost:8080/ajax_test/ContentServlet')">02</a></li>
+                 </ul></li>
+
+                 <li><a href="###" onclick="showAtRight('Info.jsp')">1</a></li>
+
+                     <li><a href="###" onclick="showAtRight('mod3.jsp')">2</a><li>
+                   <li><a href="###" onclick="showAtRight('check.jsp')">3</a></li>
+                 <li><a href="###" onclick="showAtRight('adduser.jsp')">4</a></li>
+
+                    </ul>
+
+        </div>
+        <div id="content" style="background-color:#8BC34A;width:80%;float: right">
+                    //此处显示内容
+        </div>
+            </div>
+          <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;height:10%">
+底部部分
+                <a href="#top">链接到标题</a>
+       </div>
+    </div>
+   <script type="text/javascript">
+            function showAtRight(url){
+                var XHR;
+                if (window.ActiveXObject){
+                    try{XHR= new ActiveXObject("Msxml2.XMLHTTP");}catch(e){try{XHR= new ActiveXObject("Microsoft.XMLHTTP");}catch(e){}}
+                } else {
+                    XHR=new XMLHttpRequest();
+                }
+                XHR.onreadystatechange=function(){
+                    if (XHR.readyState===4){
+                        if(XHR.status===200){
+                            document.getElementById("content").innerHTML=XHR.responseText;
+                            executeScript(XHR.responseText);
+                                                    }
+                                                    else if(XHR.status===404){
+                                                        alert("出错了☹   （错误代码：404 Not Found），……！");return;
+                                                    }
+                                                    else if (XHR.status===403){
+                                                        alert("出错了☹   （错误代码：403 Forbidden），……！");return;
+                                                    }
+                    }
+                };
+                XHR.open("GET",url,true);
+                XHR.send(null);
+            }
+     </script>
+
+    </body>
+</html>
